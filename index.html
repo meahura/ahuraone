@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <p 
-    style="direction: rtl; 
-    text-align: center;
-    padding-top: 5px; 
-    background-color: #12b730; 
-    color: white;
-    margin-bottom: 0px;"
-    > 🍎سال ۱۴۰۴ پیشاپیش مبارک 🪴</p>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -41,46 +37,25 @@
     <title>ahurarasoli| اهورا رسولی</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-primary fixed-button">
-      <div class="container-fluid p-1 px-lg-2 py-lg-2">
-       
-        <!-- Set Name Here -->
-        <a class="navbar-brand" href="#"></a>
-        <button
-          class="navbar-toggler bg-white"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div style="direction: rtl;" class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#home">خانه</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#projects"
-                >پروژها</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#courses"
-                >دورها</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#contact"
-                >راه ارتباطی</a
-              >
-            </li>
-          </ul>
-        </div>
+    <nav class="navbar navbar-light header">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#">سایت شخصی</a>
+          
+          <button class="navbar-toggler" type="button" id="menuToggle">
+              <span class="navbar-toggler-icon"></span>
+
+            </button>
       </div>
-    </nav>
+  </nav>
+  
+  <div class="full-screen-menu" id="fullScreenMenu">
+      <span class="close-menu" id="closeMenu">&times;</span>
+      <a id="bb" class="nav-link" href="#projects">پروژها</a>
+      <a class="nav-link" href="#courses">دورها</a>
+      <a class="nav-link" href="#contact">راه های ارتباطی</a>
+      <a class="nav-link" href="#dc">مدارک</a>
+  </div>
+
     <div
       class="container section min-vh-100 d-flex justify-content-center flex-column align-items-center pt-5"
       id="home"
@@ -312,6 +287,19 @@
       class="container section min-vh-100 d-flex justify-content-center flex-column align-items-center"
       id="contact"
     >
+    <a href="#dc"> 
+    <div class="gallery">
+      <img src="images/Screenshot 2025-02-12 at 10-20-10 Ahura Ra - 2025-02-10-1.pdf.png" alt="Image 1">
+      <img src="images/Screenshot 2025-02-12 at 10-20-24 Ahura Ra - 2025-02-10.pdf.png" alt="Image 2">
+      <img src="images/Screenshot 2025-02-12 at 10-20-35 Ahura Ra - 2025-02-09.pdf.png" alt="Image 3">
+      <img src="images/mcsd_pgnIebU.png" alt="Image 4">
+  </div>
+  </a>
+  
+  <div class="lightbox" id="lightbox">
+      <img id="lightbox-img" src="" alt="">
+  </div>
+  
       <div class="row mx-auto">
         <h4 style="font-size: xx-large; font-weight: bold;" class="h1 font-weight-bold mx-auto text-center">
          راه های ارتباطی
@@ -375,6 +363,40 @@
         (tooltipTriggerEl) =>
           new bootstrap.Tooltip(tooltipTriggerEl, { delay: { hide: 50 } })
       )
+
+      const images = document.querySelectorAll('.gallery img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        
+        images.forEach(img => {
+            img.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+            });
+        });
+        
+        lightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+
+
+        document.getElementById("menuToggle").addEventListener("click", function() {
+    document.getElementById("fullScreenMenu").classList.toggle("show");
+});
+
+document.getElementById("closeMenu").addEventListener("click", function() {
+    document.getElementById("fullScreenMenu").classList.remove("show");
+});
+
+// بستن منو با کلیک روی فضای خالی
+document.getElementById("fullScreenMenu").addEventListener("click", function(event) {
+    if (event.target === this) {
+        this.classList.remove("show");
+    }
+});
+
+
     </script>
   </body>
 </html>
