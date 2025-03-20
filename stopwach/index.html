@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استاپ واچ</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        .timer {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
+        .fullscreen .buttons button:not(:last-child) {
+            display: none;
+        }
+        .fullscreen .timer {
+            font-size: 128px;
+        }
+    </style>
+</head>
+<body>
+    <div class="timer">00:00:00:00</div>
+    <div class="buttons">
+        <button onclick="startStopwatch()">
+         شروع
+        </button>
+        <button onclick="stopStopwatch()">
+          توقف
+        </button>
+        <button onclick="resetStopwatch()">
+         ریست
+        </button>
+        <button onclick="toggleFullScreen()">
+           تمام صفحه
+        </button>
+    </div>
+    
+    <script>
+        let timer;
+        let milliseconds = 0;
+        let running = false;
+
+        function startStopwatch() {
+            if (!running) {
+                running = true;
+                timer = setInterval(() => {
+                    milliseconds += 10;
+                    document.querySelector(".timer").textContent = formatTime(milliseconds);
+                }, 10);
+            }
+        }
+
+        function stopStopwatch() {
+            clearInterval(timer);
+            running = false;
+        }
+
+        function resetStopwatch() {
+            clearInterval(timer);
+            running = false;
+            milliseconds = 0;
+            document.querySelector(".timer").textContent = "00:00:00.000";
+        }
+
+        function formatTime(ms) {
+            let hours = Math.floor(ms / 3600000);
+            let min = Math.floor((ms % 3600000) / 60000);
+            let sec = Math.floor((ms % 60000) / 1000);
+            let msRemain = ms % 1000;
+            return (hours < 10 ? "0" : "") + hours + ":" + (min < 10 ? "0" : "") + min + ":" + (sec < 10 ? "0" : "") + sec + "." + (msRemain < 100 ? "0" : "") + (msRemain < 10 ? "0" : "") + msRemain;
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable full-screen mode: ${err.message}`);
+                });
+                document.body.classList.add("fullscreen");
+            } else {
+                document.exitFullscreen();
+                document.body.classList.remove("fullscreen");
+            }
+        }
+    </script>
+</body>
+</html>
